@@ -1,0 +1,2069 @@
+{
+    "info": {
+        "title": "Pixelbin APIs",
+        "version": "1.0.0"
+    },
+    "openapi": "3.0.2",
+    "paths": {
+        "/service/platform/assets/v1.0/upload/direct": {
+            "post": {
+                "summary": "fileUpload | Upload File",
+                "description": "Upload File to Pixelbin",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FileUploadRequest"
+                            },
+                            "example": {
+                                "file": "fileReadStream",
+                                "path": "path/to/containing/folder",
+                                "name": "filename",
+                                "access": "public-read",
+                                "tags": ["tag1", "tag2"],
+                                "metadata": {},
+                                "overwrite": false,
+                                "filenameOverride": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/upload/url": {
+            "post": {
+                "summary": "urlUpload | Upload Asset with url",
+                "description": "Upload Asset with url",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UrlUploadRequest"
+                            },
+                            "example": {
+                                "url": "www.dummy.com/image.png",
+                                "path": "path/to/containing/folder",
+                                "name": "filename",
+                                "access": "public-read",
+                                "tags": ["tag1", "tag2"],
+                                "metadata": {},
+                                "overwrite": false,
+                                "filenameOverride": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/upload/signed-url": {
+            "post": {
+                "summary": "createSignedUrl | S3 Signed URL upload",
+                "description": "For the given asset details, a S3 signed URL will be generated,\nwhich can be then used to upload your asset.\n",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignedUploadRequest"
+                            },
+                            "example": {
+                                "path": "path/to/containing/folder",
+                                "name": "filename",
+                                "format": "jpeg",
+                                "access": "public-read",
+                                "tags": ["tag1", "tag2"],
+                                "metadata": {},
+                                "overwrite": false,
+                                "filenameOverride": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SignedUploadResponse"
+                                },
+                                "example": {
+                                    "s3PresignedUrl": {
+                                        "url": "https://domain.com/xyz",
+                                        "fields": {
+                                            "field1": "value",
+                                            "field2": "value"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/listFiles": {
+            "get": {
+                "summary": "listFiles | List and search files and folders.",
+                "description": "List all files and folders in root folder. Search for files if name is provided. If path is provided, search in the specified path.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "description": "Find items with matching name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "cat"
+                    },
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "required": false,
+                        "description": "Find items with matching path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "cat-photos"
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "required": false,
+                        "description": "Find items with matching format",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "jpeg"
+                    },
+                    {
+                        "name": "tags",
+                        "in": "query",
+                        "required": false,
+                        "description": "Find items containing these tags",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "example": ["cats", "animals"]
+                    },
+                    {
+                        "name": "onlyFiles",
+                        "in": "query",
+                        "required": false,
+                        "description": "If true will fetch only files",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "example": false
+                    },
+                    {
+                        "name": "onlyFolders",
+                        "in": "query",
+                        "required": false,
+                        "description": "If true will fetch only folders",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "example": false
+                    },
+                    {
+                        "name": "pageNo",
+                        "in": "query",
+                        "required": false,
+                        "description": "Page No.",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "default": 1
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "description": "Page Size",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "minimum": 1,
+                            "maximum": 100
+                        },
+                        "example": 10
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "description": "Key to sort results by. A \"-\" suffix will sort results in descending orders.\n",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListFilesResponse"
+                                },
+                                "example": {
+                                    "items": [
+                                        {
+                                            "_id": "dummy-uuid",
+                                            "name": "dir",
+                                            "type": "folder"
+                                        },
+                                        {
+                                            "_id": "dummy-uuid",
+                                            "name": "asset2",
+                                            "type": "file",
+                                            "path": "dir",
+                                            "fileId": "dir/asset2",
+                                            "format": "jpeg",
+                                            "size": 1000,
+                                            "access": "private"
+                                        },
+                                        {
+                                            "_id": "dummy-uuid",
+                                            "name": "asset1",
+                                            "type": "file",
+                                            "path": "dir",
+                                            "fileId": "dir/asset1",
+                                            "format": "jpeg",
+                                            "size": 1000,
+                                            "access": "private"
+                                        }
+                                    ],
+                                    "page": {
+                                        "type": "number",
+                                        "size": 4,
+                                        "current": 1,
+                                        "hasNext": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/files/id/{_id}": {
+            "get": {
+                "summary": "getFileById | Get file details with _id",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "_id of File",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "c9138153-94ea-4dbe-bea9-65d43dba85ae"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/files/{fileId}": {
+            "get": {
+                "summary": "getFileByFileId | Get file details with fileId",
+                "parameters": [
+                    {
+                        "name": "fileId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Combination of `path` and `name` of file",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "path/to/file/name"
+                    }
+                ],
+                "tags": ["Assets"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "updateFile | Update file details",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "fileId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Combination of `path` and `name`",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "path/to/file/name"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFileRequest"
+                            },
+                            "example": {
+                                "name": "asset",
+                                "path": "dir",
+                                "access": "private",
+                                "isActive": false,
+                                "tags": ["tag1", "tag2"],
+                                "metadata": {
+                                    "key": "value"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "deleteFile | Delete file",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "fileId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Combination of `path` and `name`",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "path/to/file/name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/files/delete": {
+            "post": {
+                "summary": "deleteFiles | Delete multiple files",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteMultipleFilesRequest"
+                            },
+                            "example": {
+                                "ids": ["_id_1", "_id_2", "_id_3"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FilesResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/folders": {
+            "post": {
+                "summary": "createFolder | Create folder",
+                "description": "Create a new folder at the specified path. Also creates the ancestors if they do not exist.\n",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateFolderRequest"
+                            },
+                            "example": {
+                                "name": "subDir",
+                                "path": "dir"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success - List of all created folders",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FoldersResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "_id": "dummy-uuid",
+                                        "name": "subDir",
+                                        "path": "dir",
+                                        "isActive": true
+                                    },
+                                    {
+                                        "_id": "dummy-uuid-2",
+                                        "name": "subDir",
+                                        "path": "dir",
+                                        "isActive": true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/folders/{folderId}": {
+            "patch": {
+                "summary": "updateFolder | Update folder details",
+                "description": "Update folder details. Eg: Soft delete it\nby making `isActive` as `false`.\nWe currently do not support updating folder name or path.\n",
+                "ignore": true,
+                "parameters": [
+                    {
+                        "name": "folderId",
+                        "in": "path",
+                        "required": true,
+                        "description": "combination of `path` and `name`",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "path/to/folder/name"
+                    }
+                ],
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateFolderRequest"
+                            },
+                            "example": {
+                                "isActive": false
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FoldersResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "subDir",
+                                    "path": "dir",
+                                    "isActive": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/folders/{_id}": {
+            "delete": {
+                "summary": "deleteFolder | Delete folder",
+                "description": "Delete folder and all its children permanently.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "_id of folder to be deleted",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "c9138153-94ea-4dbe-bea9-65d43dba85ae"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FoldersResponse"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "_id": "dummy-uuid",
+                                        "name": "subDir",
+                                        "path": "dir",
+                                        "isActive": true
+                                    },
+                                    {
+                                        "_id": "dummy-uuid-2",
+                                        "name": "subDir",
+                                        "path": "dir",
+                                        "isActive": true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/playground/plugins": {
+            "get": {
+                "summary": "getModules | Get all transformation modules",
+                "description": "Get all transformation modules.\n",
+                "tags": ["Assets"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransformationModulesResponse"
+                                },
+                                "example": {
+                                    "delimiters": {
+                                        "operationSeparator": "~",
+                                        "parameterSeparator": ":"
+                                    },
+                                    "plugins": {
+                                        "erase": {
+                                            "identifier": "erase",
+                                            "name": "EraseBG",
+                                            "description": "EraseBG Background Removal Module",
+                                            "credentials": {
+                                                "required": false
+                                            },
+                                            "operations": [
+                                                {
+                                                    "params": {
+                                                        "name": "Industry Type",
+                                                        "type": "enum",
+                                                        "enum": ["general", "ecommerce"],
+                                                        "default": "general",
+                                                        "identifier": "i",
+                                                        "title": "Industry type"
+                                                    },
+                                                    "displayName": "Remove background of an image",
+                                                    "method": "bg",
+                                                    "description": "Remove the background of any image"
+                                                }
+                                            ],
+                                            "enabled": true
+                                        }
+                                    },
+                                    "presets": [
+                                        {
+                                            "_id": "dummy-id",
+                                            "createdAt": "2022-02-14T10:06:17.803Z",
+                                            "updatedAt": "2022-02-14T10:06:17.803Z",
+                                            "isActive": true,
+                                            "orgId": "265",
+                                            "presetName": "compressor",
+                                            "transformation": "t.compress(q:95)",
+                                            "archived": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/playground/plugins/{identifier}": {
+            "get": {
+                "summary": "getModule | Get Transformation Module by module identifier",
+                "description": "Get Transformation Module by module identifier\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "identifier",
+                        "in": "path",
+                        "required": true,
+                        "description": "identifier of Transformation Module",
+                        "example": "t",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransformationModuleResponse"
+                                },
+                                "example": {
+                                    "identifier": "erase",
+                                    "name": "EraseBG",
+                                    "description": "EraseBG Background Removal Module",
+                                    "credentials": null,
+                                    "required": false,
+                                    "operations": [
+                                        {
+                                            "params": {
+                                                "name": "Industry Type",
+                                                "type": "enum",
+                                                "enum": ["general", "ecommerce"],
+                                                "default": "general",
+                                                "identifier": "i",
+                                                "title": "Industry type",
+                                                "displayName": "Remove background of an image",
+                                                "method": "bg",
+                                                "description": "Remove the background of any image"
+                                            }
+                                        }
+                                    ],
+                                    "enabled": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/organization/v1.0/apps/{token}": {
+            "get": {
+                "summary": "getAppByToken | Get App Details",
+                "description": "Get App and org details with the API_TOKEN",
+                "tags": ["Organization"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "token",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "Pixelbin api token",
+                        "example": "<API-TOKEN>"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success. Returns a JSON object as shown below. Refer `AppDetailsByToken` for more details.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppDetailsByToken"
+                                },
+                                "example": {
+                                    "app": {
+                                        "_id": 123,
+                                        "orgId": 12,
+                                        "name": "Desktop Client App",
+                                        "permissions": ["read", "read_write"],
+                                        "active": false,
+                                        "createdAt": "2021-07-15T07:47:00Z",
+                                        "updatedAt": "2021-07-15T07:47:00Z"
+                                    },
+                                    "org": {
+                                        "_id": 12,
+                                        "name": "org_1",
+                                        "cloudName": "testcloudname",
+                                        "accountType": "individual",
+                                        "industry": "Ecommerce",
+                                        "strength": "1",
+                                        "active": "false"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "folderItem": {
+                "type": "object",
+                "required": ["_id", "name", "path", "type"],
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "Id of the folder item"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the folder item"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Path of containing folder"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of the item. `file` or `folder`"
+                    }
+                },
+                "example": {
+                    "_id": "dummy-uuid",
+                    "name": "dir",
+                    "type": "folder",
+                    "path": ""
+                }
+            },
+            "exploreItem": {
+                "type": "object",
+                "required": ["_id", "name", "type", "path"],
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "id of the exploreItem"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the item"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of item whether `file` or `folder`"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Path of containing folder"
+                    },
+                    "fileId": {
+                        "type": "string",
+                        "description": "Combination of `path` and `name` of file"
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "Format of the file"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Size of the file in bytes"
+                    },
+                    "access": {
+                        "type": "string",
+                        "description": "Access level of asset, can be either `public-read` or `private`"
+                    }
+                },
+                "example": [
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "dir",
+                        "path": "",
+                        "type": "folder"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset1",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset1",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    }
+                ]
+            },
+            "page": {
+                "type": "object",
+                "required": ["type", "size", "current", "hasNext", "itemTotal"],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Type of page"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Number of items on the page"
+                    },
+                    "current": {
+                        "type": "integer",
+                        "description": "Current page number."
+                    },
+                    "hasNext": {
+                        "type": "boolean",
+                        "description": "Whether the next page exists."
+                    },
+                    "itemTotal": {
+                        "type": "integer",
+                        "description": "Total number of items."
+                    }
+                },
+                "example": {
+                    "type": "number",
+                    "size": 10,
+                    "current": 1,
+                    "hasNext": true,
+                    "itemTotal": 5
+                }
+            },
+            "exploreResponse": {
+                "type": "object",
+                "required": ["items", "page"],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/exploreItem"
+                        },
+                        "description": "exploreItems in current page"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/page",
+                        "description": "page details"
+                    }
+                },
+                "example": {
+                    "items": [
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "dir",
+                            "type": "folder"
+                        },
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "asset2",
+                            "type": "file",
+                            "path": "dir",
+                            "fileId": "dir/asset2",
+                            "format": "jpeg",
+                            "size": 1000,
+                            "access": "private"
+                        },
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "asset1",
+                            "type": "file",
+                            "path": "dir",
+                            "fileId": "dir/asset1",
+                            "format": "jpeg",
+                            "size": 1000,
+                            "access": "private"
+                        }
+                    ],
+                    "page": {
+                        "type": "number",
+                        "size": 4,
+                        "current": 1,
+                        "hasNext": false
+                    }
+                }
+            },
+            "ListFilesResponse": {
+                "type": "object",
+                "required": ["items", "page"],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/exploreItem"
+                        },
+                        "description": "exploreItems in current page"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/page",
+                        "description": "page details"
+                    }
+                },
+                "example": {
+                    "items": [
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "dir",
+                            "type": "folder"
+                        },
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "asset2",
+                            "type": "file",
+                            "path": "dir",
+                            "fileId": "dir/asset2",
+                            "format": "jpeg",
+                            "size": 1000,
+                            "access": "private"
+                        },
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "asset1",
+                            "type": "file",
+                            "path": "dir",
+                            "fileId": "dir/asset1",
+                            "format": "jpeg",
+                            "size": 1000,
+                            "access": "private"
+                        }
+                    ],
+                    "page": {
+                        "type": "number",
+                        "size": 4,
+                        "current": 1,
+                        "hasNext": false
+                    }
+                }
+            },
+            "exploreFolderResponse": {
+                "type": "object",
+                "required": ["folder", "items", "page"],
+                "properties": {
+                    "folder": {
+                        "$ref": "#/components/schemas/folderItem",
+                        "description": "requested folder item"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/exploreItem"
+                        },
+                        "description": "exploreItems in current page"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/page",
+                        "description": "page details"
+                    }
+                },
+                "example": {
+                    "folder": {
+                        "_id": "dummy-uuid",
+                        "name": "dir",
+                        "path": "",
+                        "type": "folder"
+                    },
+                    "items": [
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "dir1",
+                            "path": "dir",
+                            "type": "folder"
+                        },
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "asset2",
+                            "type": "file",
+                            "path": "dir",
+                            "fileId": "dir/asset2",
+                            "format": "jpeg",
+                            "size": 1000,
+                            "access": "private"
+                        },
+                        {
+                            "_id": "dummy-uuid",
+                            "name": "asset1",
+                            "type": "file",
+                            "path": "dir",
+                            "fileId": "dir/asset1",
+                            "format": "jpeg",
+                            "size": 1000,
+                            "access": "private"
+                        }
+                    ],
+                    "page": {
+                        "type": "number",
+                        "size": 4,
+                        "current": 1,
+                        "hasNext": false
+                    }
+                }
+            },
+            "FileUploadRequest": {
+                "type": "object",
+                "required": ["file"],
+                "properties": {
+                    "file": {
+                        "type": "file",
+                        "format": "binary",
+                        "description": "Asset file"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Path where you want to store the asset. Path of containing folder"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the asset, if not provided name of the file will be used. Note - The provided name will be slugified to make it URL safe"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Asset tags"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Asset related metadata"
+                    },
+                    "overwrite": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Overwrite flag. If set to `true` will overwrite any file that exists with same path, name and type. Defaults to `false`."
+                    },
+                    "filenameOverride": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If set to `true` will add unique characters to name if asset with given name already exists. If overwrite flag is set to `true`, preference will be given to overwrite flag. If both are set to `false` an error will be raised."
+                    }
+                }
+            },
+            "UrlUploadRequest": {
+                "type": "object",
+                "required": ["url"],
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "url",
+                        "description": "Asset URL"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Path where you want to store the asset. Path of containing folder."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the asset, if not provided name of the file will be used. Note - The provided name will be slugified to make it URL safe"
+                    },
+                    "access": {
+                        "$ref": "#/components/schemas/AccessEnum",
+                        "description": "Access level of asset, can be either `public-read` or `private`",
+                        "default": "private"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Asset tags"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Asset related metadata"
+                    },
+                    "overwrite": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Overwrite flag. If set to `true` will overwrite any file that exists with same path, name and type. Defaults to `false`."
+                    },
+                    "filenameOverride": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If set to `true` will add unique characters to name if asset with given name already exists. If overwrite flag is set to `true`, preference will be given to overwrite flag. If both are set to `false` an error will be raised."
+                    }
+                }
+            },
+            "UploadResponse": {
+                "type": "object",
+                "required": ["_id", "fileId", "name", "path", "format", "size", "access"],
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "_id of the item"
+                    },
+                    "fileId": {
+                        "type": "string",
+                        "description": "Combination of `path` and `name` of file"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the item"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "path to the parent folder"
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "format of the file"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "size of file in bytes"
+                    },
+                    "access": {
+                        "type": "string",
+                        "description": "Access level of asset, can be either public-read or private"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "tags associated with the item"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "metadata associated with the item"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "url of the item"
+                    },
+                    "thumbnail": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "url of item thumbnail"
+                    }
+                }
+            },
+            "SignedUploadRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "name of the file"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Path of containing folder."
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "Format of the file"
+                    },
+                    "access": {
+                        "$ref": "#/components/schemas/AccessEnum",
+                        "description": "Access level of asset, can be either `public-read` or `private`"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "description": "Tags associated with the file.",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Metadata associated with the file."
+                    },
+                    "overwrite": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Overwrite flag. If set to `true` will overwrite any file that exists with same path, name and type. Defaults to `false`."
+                    },
+                    "filenameOverride": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If set to `true` will add unique characters to name if asset with given name already exists. If overwrite flag is set to `true`, preference will be given to overwrite flag. If both are set to `false` an error will be raised."
+                    }
+                }
+            },
+            "SignedUploadResponse": {
+                "type": "object",
+                "required": ["s3PresignedUrl"],
+                "properties": {
+                    "s3PresignedUrl": {
+                        "$ref": "#/components/schemas/PresignedUrl",
+                        "description": "`signedDetails` for upload with frontend sdk\n"
+                    }
+                }
+            },
+            "PresignedUrl": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "`presigned url` for upload\n"
+                    },
+                    "fields": {
+                        "type": "object",
+                        "description": "signed fields to be sent along with request"
+                    }
+                }
+            },
+            "FilesResponse": {
+                "type": "object",
+                "required": [
+                    "_id",
+                    "name",
+                    "path",
+                    "fileId",
+                    "format",
+                    "size",
+                    "access",
+                    "isActive"
+                ],
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "_id of the file"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the file"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "path of containing folder."
+                    },
+                    "fileId": {
+                        "type": "string",
+                        "description": "Combination of `path` and `name` of file"
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "format of the file"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "size of the file in bytes"
+                    },
+                    "access": {
+                        "type": "string",
+                        "description": "Access level of file, can be either `public-read` or `private`"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Whether the file is active"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Tags associated with the file"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Metadata associated with the file"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "url of the file"
+                    },
+                    "thumbnail": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "url of the thumbnail of the file"
+                    }
+                }
+            },
+            "UpdateFileRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the file"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "path of containing folder."
+                    },
+                    "access": {
+                        "type": "string",
+                        "description": "Access level of asset, can be either `public-read` or `private`"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Whether the file is active"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "description": "Tags associated with the file",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Metadata associated with the file"
+                    }
+                },
+                "example": {
+                    "name": "asset",
+                    "path": "dir",
+                    "access": "private",
+                    "isActive": false,
+                    "tags": ["tag1", "tag2"],
+                    "metadata": {
+                        "key": "value"
+                    }
+                }
+            },
+            "FoldersResponse": {
+                "type": "object",
+                "required": ["_id", "name", "path", "isActive"],
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "_id of the folder"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the folder"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "path of containing folder."
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "whether the folder is active"
+                    }
+                }
+            },
+            "CreateFolderRequest": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the folder"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "path of containing folder."
+                    }
+                },
+                "example": {
+                    "name": "subDir",
+                    "path": "dir"
+                }
+            },
+            "UpdateFolderRequest": {
+                "type": "object",
+                "properties": {
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "whether the folder is active"
+                    }
+                }
+            },
+            "TransformationModulesResponse": {
+                "type": "object",
+                "properties": {
+                    "delimiters": {
+                        "$ref": "#/components/schemas/Delimiter",
+                        "description": "Delimiter for parsing plugin schema"
+                    },
+                    "plugins": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TransformationModuleResponse"
+                        },
+                        "description": "Transformations currently supported by the pixelbin"
+                    },
+                    "presets": {
+                        "type": "array",
+                        "description": "List of saved presets"
+                    }
+                }
+            },
+            "DeleteMultipleFilesRequest": {
+                "type": "object",
+                "required": ["ids"],
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Array of file _ids to delete"
+                    }
+                }
+            },
+            "Delimiter": {
+                "type": "object",
+                "properties": {
+                    "operationSeparator": {
+                        "type": "string",
+                        "description": "separator to separate operations in the url pattern"
+                    },
+                    "parameterSeparator": {
+                        "type": "string",
+                        "description": "separator to separate parameters used with operations in the url pattern"
+                    }
+                }
+            },
+            "TransformationModuleResponse": {
+                "type": "object",
+                "properties": {
+                    "identifier": {
+                        "type": "string",
+                        "description": "identifier for the plugin type"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the plugin"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "description of the plugin"
+                    },
+                    "credentials": {
+                        "type": "object",
+                        "description": "credentials, if any, associated with the plugin"
+                    },
+                    "operations": {
+                        "type": "array",
+                        "description": "supported operations in the plugin"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "whether the plugin is enabled"
+                    }
+                }
+            },
+            "AccessEnum": {
+                "type": "string",
+                "enum": ["public-read", "private"]
+            },
+            "OrganizationDetailSchema": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "integer",
+                        "description": "Id of the organization"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Organization Name"
+                    },
+                    "cloudName": {
+                        "type": "string",
+                        "description": "Unique cloud name associated with the organization"
+                    },
+                    "ownerId": {
+                        "type": "string",
+                        "description": "User Id of the organization owner"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the organization is active"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Timestamp when the organization was created"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Timestamp when the organization was last updated"
+                    }
+                }
+            },
+            "AppSchema": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "integer",
+                        "description": "App id"
+                    },
+                    "orgId": {
+                        "type": "integer",
+                        "description": "Organization id the app belongs to"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the app"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "api token for the app"
+                    },
+                    "permissions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": ["read", "read_write", "transform"]
+                        },
+                        "description": "Permissions applied on the app"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the app is active"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Timestamp when the app was created"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Timestamp when the app was last updated"
+                    }
+                }
+            },
+            "AppDetailsByToken": {
+                "type": "object",
+                "properties": {
+                    "app": {
+                        "$ref": "#/components/schemas/AppSchema"
+                    },
+                    "org": {
+                        "$ref": "#/components/schemas/OrganizationDetailSchema"
+                    }
+                }
+            },
+            "ErrorSchema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "responses": {
+            "BadRequest": {
+                "description": "Bad Request Error. See the error object in the response body to know the exact reason.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ErrorSchema"
+                        }
+                    }
+                }
+            },
+            "OrganizationNotFound": {
+                "description": "Bad Request Error. See the error object in the response body to know the exact reason.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ErrorSchema"
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Internal Server Error. See the error object in the response body to know the exact reason.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/InternalServerErrorSchema"
+                        }
+                    }
+                }
+            }
+        },
+        "examples": {
+            "UpdateFolderRequestExample": {
+                "isActive": false
+            },
+            "FileResponseExample": {
+                "_id": "dummy-uuid",
+                "name": "asset",
+                "path": "dir",
+                "fileId": "dir/asset",
+                "format": "jpeg",
+                "size": 1000,
+                "access": "private",
+                "isActive": true,
+                "tags": ["tag1", "tag2"],
+                "metadata": {
+                    "key": "value"
+                },
+                "url": "https://domain.com/filename.jpeg"
+            },
+            "UpdateFileRequestExample": {
+                "name": "asset",
+                "path": "dir",
+                "access": "private",
+                "isActive": false,
+                "tags": ["tag1", "tag2"],
+                "metadata": {
+                    "key": "value"
+                }
+            },
+            "FolderResponseExample": {
+                "_id": "dummy-uuid",
+                "name": "subDir",
+                "path": "dir",
+                "isActive": true
+            },
+            "FolderRequestExample": {
+                "fileId": "path/to/folder/name",
+                "isActive": true
+            },
+            "FolderListResponseExample": [
+                {
+                    "_id": "dummy-uuid",
+                    "name": "subDir",
+                    "path": "dir",
+                    "isActive": true
+                },
+                {
+                    "_id": "dummy-uuid-2",
+                    "name": "subDir",
+                    "path": "dir",
+                    "isActive": true
+                }
+            ],
+            "ExploreFolderResponseExample": {
+                "folder": {
+                    "_id": "dummy-uuid",
+                    "name": "dir",
+                    "path": "",
+                    "type": "folder"
+                },
+                "items": [
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "dir1",
+                        "path": "dir",
+                        "type": "folder"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset2",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset2",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset1",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset1",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    }
+                ],
+                "page": {
+                    "type": "number",
+                    "size": 4,
+                    "current": 1,
+                    "hasNext": false
+                }
+            },
+            "ExploreResponseExample": {
+                "items": [
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "dir",
+                        "type": "folder"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset2",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset2",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset1",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset1",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    }
+                ],
+                "page": {
+                    "type": "number",
+                    "size": 4,
+                    "current": 1,
+                    "hasNext": false
+                }
+            },
+            "ListFilesResponseExample": {
+                "items": [
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "dir",
+                        "type": "folder"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset2",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset2",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    },
+                    {
+                        "_id": "dummy-uuid",
+                        "name": "asset1",
+                        "type": "file",
+                        "path": "dir",
+                        "fileId": "dir/asset1",
+                        "format": "jpeg",
+                        "size": 1000,
+                        "access": "private"
+                    }
+                ],
+                "page": {
+                    "type": "number",
+                    "size": 4,
+                    "current": 1,
+                    "hasNext": false
+                }
+            },
+            "TransformationModulesResponseExample": {
+                "delimiters": {
+                    "operationSeparator": "~",
+                    "parameterSeparator": ":"
+                },
+                "plugins": {
+                    "erase": {
+                        "identifier": "erase",
+                        "name": "EraseBG",
+                        "description": "EraseBG Background Removal Module",
+                        "credentials": {
+                            "required": false
+                        },
+                        "operations": [
+                            {
+                                "params": {
+                                    "name": "Industry Type",
+                                    "type": "enum",
+                                    "enum": ["general", "ecommerce"],
+                                    "default": "general",
+                                    "identifier": "i",
+                                    "title": "Industry type"
+                                },
+                                "displayName": "Remove background of an image",
+                                "method": "bg",
+                                "description": "Remove the background of any image"
+                            }
+                        ],
+                        "enabled": true
+                    }
+                },
+                "presets": [
+                    {
+                        "_id": "dummy-id",
+                        "createdAt": "2022-02-14T10:06:17.803Z",
+                        "updatedAt": "2022-02-14T10:06:17.803Z",
+                        "isActive": true,
+                        "orgId": "265",
+                        "presetName": "compressor",
+                        "transformation": "t.compress(q:95)",
+                        "archived": false
+                    }
+                ]
+            },
+            "TransformationModuleResponseExample": {
+                "identifier": "erase",
+                "name": "EraseBG",
+                "description": "EraseBG Background Removal Module",
+                "credentials": {
+                    "required": false
+                },
+                "operations": [
+                    {
+                        "params": {
+                            "name": "Industry Type",
+                            "type": "enum",
+                            "enum": ["general", "ecommerce"],
+                            "default": "general",
+                            "identifier": "i",
+                            "title": "Industry type"
+                        },
+                        "displayName": "Remove background of an image",
+                        "method": "bg",
+                        "description": "Remove the background of any image"
+                    }
+                ],
+                "enabled": true
+            },
+            "UploadResponseExample": {
+                "_id": "dummy-uuid",
+                "name": "asset",
+                "path": "dir",
+                "fileId": "dir/asset",
+                "format": "jpeg",
+                "size": 1000,
+                "access": "private",
+                "isActive": true,
+                "tags": ["tag1", "tag2"],
+                "metadata": {
+                    "key": "value"
+                },
+                "url": "https://domain.com/filename.jpeg"
+            },
+            "SignedUrlExample": {
+                "s3PresignedUrl": {
+                    "url": "https://domain.com/xyz",
+                    "fields": {
+                        "field1": "value",
+                        "field2": "value"
+                    }
+                }
+            },
+            "DeleteMultipleFilesRequestExample": {
+                "ids": ["_id_1", "_id_2", "_id_3"]
+            },
+            "CreateFolderRequestExample": {
+                "name": "subDir",
+                "path": "dir"
+            },
+            "FileUploadRequestExample": {
+                "file": "fileReadStream",
+                "path": "path/to/containing/folder",
+                "name": "filename",
+                "access": "public-read",
+                "tags": ["tag1", "tag2"],
+                "metadata": {},
+                "overwrite": false,
+                "filenameOverride": true
+            },
+            "urlUploadRequestExample": {
+                "url": "www.dummy.com/image.png",
+                "path": "path/to/containing/folder",
+                "name": "filename",
+                "access": "public-read",
+                "tags": ["tag1", "tag2"],
+                "metadata": {},
+                "overwrite": false,
+                "filenameOverride": true
+            },
+            "signedUrlUploadRequestExample": {
+                "path": "path/to/containing/folder",
+                "name": "filename",
+                "format": "jpeg",
+                "access": "public-read",
+                "tags": ["tag1", "tag2"],
+                "metadata": {},
+                "overwrite": false,
+                "filenameOverride": true
+            },
+            "AppByTokenExample": {
+                "app": {
+                    "_id": 123,
+                    "orgId": 12,
+                    "name": "Desktop Client App",
+                    "permissions": ["read", "read_write"],
+                    "active": false,
+                    "createdAt": "2021-07-15T07:47:00Z",
+                    "updatedAt": "2021-07-15T07:47:00Z"
+                },
+                "org": {
+                    "_id": 12,
+                    "name": "org_1",
+                    "cloudName": "testcloudname",
+                    "accountType": "individual",
+                    "industry": "Ecommerce",
+                    "strength": "1",
+                    "active": "false"
+                }
+            }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "API-TOKEN"
+            }
+        }
+    },
+    "security": [
+        {
+            "ApiKeyAuth": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://api.pixelbin.io"
+        }
+    ]
+}
