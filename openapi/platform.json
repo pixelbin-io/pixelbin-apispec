@@ -1,7 +1,8 @@
 {
     "info": {
-        "title": "Pixelbin APIs",
-        "version": "1.1.0"
+      "title": "Pixelbin APIs",
+      "version": "1.2.0",
+      "description": "Pixelbin APIs"
     },
     "openapi": "3.0.2",
     "paths": {
@@ -601,6 +602,48 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "summary": "getFolderDetails | Get folder details",
+                "description": "Get folder details\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "query",
+                        "required": false,
+                        "description": "Folder path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "dir1/dir2"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "description": "Folder name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "dir"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/exploreItem"
+                                },
+                                "example": {
+                                    "$ref": "#/components/examples/ExploreItemExample"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/service/platform/assets/v1.0/folders/{folderId}": {
@@ -695,6 +738,472 @@
                                         "isActive": true
                                     }
                                 ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/folders/{_id}/ancestors": {
+            "get": {
+                "summary": "getFolderAncestors | Get all ancestors of a folder",
+                "description": "Get all ancestors of a folder, using the folder ID.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "_id of the folder",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "c9138153-94ea-4dbe-bea9-65d43dba85ae"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetAncestorsResponse"
+                                },
+                                "example": {
+                                    "folder": {
+                                        "_id": "dummy-uuid",
+                                        "name": "subDir",
+                                        "path": "dir1/dir2",
+                                        "isActive": true
+                                    },
+                                    "ancestors": [
+                                        {
+                                            "_id": "dummy-uuid-2",
+                                            "name": "dir1",
+                                            "path": "",
+                                            "isActive": true
+                                        },
+                                        {
+                                            "_id": "dummy-uuid-2",
+                                            "name": "dir2",
+                                            "path": "dir1",
+                                            "isActive": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/credentials": {
+            "post": {
+                "summary": "addCredentials | Add credentials for a transformation module.",
+                "description": "Add a transformation modules's credentials for an organization.\n",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddCredentialsRequest"
+                            },
+                            "example": {
+                                "pluginId": "awsRek",
+                                "credentials": {
+                                    "region": "ap-south-1",
+                                    "accessKeyId": "123456789ABC",
+                                    "secretAccessKey": "DUMMY1234567890"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddCredentialsResponse"
+                                },
+                                "example": {
+                                    "_id": "123ee789-7ae8-4336-b9bd-e4f33c049002",
+                                    "createdAt": "2022-10-04T09:52:09.545Z",
+                                    "updatedAt": "2022-10-04T09:52:09.545Z",
+                                    "orgId": 23,
+                                    "pluginId": "awsRek"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/credentials/{pluginId}": {
+            "patch": {
+                "summary": "updateCredentials | Update credentials of a transformation module.",
+                "description": "Update credentials of a transformation module, for an organization.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "pluginId",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the plugin whose credentials are being updated",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "awsRek"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCredentialsRequest"
+                            },
+                            "example": {
+                                "pluginId": "awsRek",
+                                "credentials": {
+                                    "region": "ap-south-1",
+                                    "accessKeyId": "123456789ABC",
+                                    "secretAccessKey": "DUMMY1234567890"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddCredentialsResponse"
+                                },
+                                "example": {
+                                    "_id": "123ee789-7ae8-4336-b9bd-e4f33c049002",
+                                    "createdAt": "2022-10-04T09:52:09.545Z",
+                                    "updatedAt": "2022-10-04T09:52:09.545Z",
+                                    "orgId": 23,
+                                    "pluginId": "awsRek"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "deleteCredentials | Delete credentials of a transformation module.",
+                "description": "Delete credentials of a transformation module, for an organization.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "pluginId",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the plugin whose credentials are being deleted",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "awsRek"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddCredentialsResponse"
+                                },
+                                "example": {
+                                    "_id": "123ee789-7ae8-4336-b9bd-e4f33c049002",
+                                    "createdAt": "2022-10-04T09:52:09.545Z",
+                                    "updatedAt": "2022-10-04T09:52:09.545Z",
+                                    "orgId": 23,
+                                    "pluginId": "awsRek"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/presets": {
+            "post": {
+                "summary": "addPreset | Add a preset.",
+                "description": "Add a preset for an organization.\n",
+                "tags": ["Assets"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddPresetRequest"
+                            },
+                            "example": {
+                                "presetName": "p1",
+                                "transformation": "t.flip()~t.flop()",
+                                "params": {
+                                    "w": {
+                                        "type": "integer",
+                                        "default": 200
+                                    },
+                                    "h": {
+                                        "type": "integer",
+                                        "default": 400
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddPresetResponse"
+                                },
+                                "example": {
+                                    "presetName": "p1",
+                                    "transformation": "t.flip()~t.flop()",
+                                    "params": {
+                                        "w": {
+                                            "type": "integer",
+                                            "default": 200
+                                        },
+                                        "h": {
+                                            "type": "integer",
+                                            "default": 400
+                                        }
+                                    },
+                                    "archived": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "getPresets | Get all presets.",
+                "description": "Get all presets of an organization.\n",
+                "tags": ["Assets"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddPresetResponse"
+                                },
+                                "example": {
+                                    "items": [
+                                        {
+                                            "presetName": "p1",
+                                            "transformation": "t.flip()~t.flop()",
+                                            "params": {
+                                                "w": {
+                                                    "type": "integer",
+                                                    "default": 200
+                                                },
+                                                "h": {
+                                                    "type": "integer",
+                                                    "default": 400
+                                                }
+                                            },
+                                            "archived": true
+                                        }
+                                    ],
+                                    "page": {
+                                        "type": "number",
+                                        "size": 1,
+                                        "current": 1,
+                                        "hasNext": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/presets/{presetName}": {
+            "patch": {
+                "summary": "updatePreset | Update a preset.",
+                "description": "Update a preset of an organization.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "presetName",
+                        "in": "path",
+                        "required": true,
+                        "description": "Name of the preset to be updated",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "p1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePresetRequest"
+                            },
+                            "example": {
+                                "archived": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddPresetResponse"
+                                },
+                                "example": {
+                                    "presetName": "p1",
+                                    "transformation": "t.flip()~t.flop()",
+                                    "params": {
+                                        "w": {
+                                            "type": "integer",
+                                            "default": 200
+                                        },
+                                        "h": {
+                                            "type": "integer",
+                                            "default": 400
+                                        }
+                                    },
+                                    "archived": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "deletePreset | Delete a preset.",
+                "description": "Delete a preset of an organization.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "presetName",
+                        "in": "path",
+                        "required": true,
+                        "description": "Name of the preset to be deleted",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "p1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddPresetResponse"
+                                },
+                                "example": {
+                                    "presetName": "p1",
+                                    "transformation": "t.flip()~t.flop()",
+                                    "params": {
+                                        "w": {
+                                            "type": "integer",
+                                            "default": 200
+                                        },
+                                        "h": {
+                                            "type": "integer",
+                                            "default": 400
+                                        }
+                                    },
+                                    "archived": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "getPreset | Get a preset.",
+                "description": "Get a preset of an organization.\n",
+                "tags": ["Assets"],
+                "parameters": [
+                    {
+                        "name": "presetName",
+                        "in": "path",
+                        "required": true,
+                        "description": "Name of the preset to be fetched",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "p1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddPresetResponse"
+                                },
+                                "example": {
+                                    "presetName": "p1",
+                                    "transformation": "t.flip()~t.flop()",
+                                    "params": {
+                                        "w": {
+                                            "type": "integer",
+                                            "default": 200
+                                        },
+                                        "h": {
+                                            "type": "integer",
+                                            "default": 400
+                                        }
+                                    },
+                                    "archived": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service/platform/assets/v1.0/playground/default": {
+            "get": {
+                "summary": "getDefaultAssetForPlayground | Get default asset for playground",
+                "description": "Get default asset for playground",
+                "tags": ["Assets"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadResponse"
+                                },
+                                "example": {
+                                    "_id": "dummy-uuid",
+                                    "name": "asset",
+                                    "path": "dir",
+                                    "fileId": "dir/asset",
+                                    "format": "jpeg",
+                                    "size": 1000,
+                                    "access": "private",
+                                    "isActive": true,
+                                    "tags": ["tag1", "tag2"],
+                                    "metadata": {
+                                        "key": "value"
+                                    },
+                                    "url": "https://domain.com/filename.jpeg"
+                                }
                             }
                         }
                     }
@@ -1167,6 +1676,11 @@
                         "type": "string",
                         "description": "Name of the asset, if not provided name of the file will be used. Note - The provided name will be slugified to make it URL safe"
                     },
+                    "access": {
+                        "$ref": "#/components/schemas/AccessEnum",
+                        "description": "Access level of asset, can be either `public-read` or `private`",
+                        "default": "private"
+                    },
                     "tags": {
                         "type": "array",
                         "items": {
@@ -1597,6 +2111,242 @@
                 "type": "string",
                 "enum": ["public-read", "private"]
             },
+            "Credentials": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "Unique ID for credential"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Credential creation ISO timestamp"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Credential update ISO timestamp"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Tells if credential is active or not"
+                    },
+                    "orgId": {
+                        "type": "string",
+                        "description": "ID of the organization this credential belongs to"
+                    },
+                    "pluginId": {
+                        "type": "string",
+                        "description": "Unique identifier for the plugin this credential belongs to"
+                    },
+                    "credentials": {
+                        "type": "object",
+                        "description": "Credentials object. It is different for each plugin"
+                    },
+                    "description": "All credentials of organization"
+                }
+            },
+            "CredentialsItem": {
+                "type": "object",
+                "properties": {
+                    "pluginId": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Credentials"
+                        }
+                    }
+                }
+            },
+            "GetCredentialsResponse": {
+                "type": "object",
+                "required": ["credentials"],
+                "properties": {
+                    "credentials": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CredentialsItem"
+                        }
+                    }
+                }
+            },
+            "AddCredentialsRequest": {
+                "type": "object",
+                "required": ["pluginId", "credentials"],
+                "properties": {
+                    "credentials": {
+                        "type": "object",
+                        "description": "Credentials of the plugin"
+                    },
+                    "pluginId": {
+                        "type": "string",
+                        "description": "Unique identifier for the plugin this credential belongs to"
+                    }
+                }
+            },
+            "UpdateCredentialsRequest": {
+                "type": "object",
+                "required": ["credentials"],
+                "properties": {
+                    "credentials": {
+                        "type": "object",
+                        "description": "Credentials of the plugin"
+                    }
+                }
+            },
+            "AddCredentialsResponse": {
+                "type": "object",
+                "required": ["_id", "createdAt", "updatedAt", "pluginId", "orgId"],
+                "properties": {
+                    "credentials": {
+                        "type": "object",
+                        "schema": {
+                            "$ref": "#/components/schemas/Credentials"
+                        }
+                    }
+                }
+            },
+            "DeleteCredentialsResponse": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "Unique Credential ID"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Credential creation ISO timestamp"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Credential update ISO timestamp"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Tells if credential is active or not"
+                    },
+                    "orgId": {
+                        "type": "string",
+                        "description": "ID of the organization this credential belongs to"
+                    },
+                    "pluginId": {
+                        "type": "string",
+                        "description": "Unique identifier for the plugin this credential belongs to"
+                    },
+                    "credentials": {
+                        "type": "object",
+                        "description": "Credentials object. It is different for each plugin"
+                    }
+                }
+            },
+            "GetAncestorsResponse": {
+                "type": "object",
+                "properties": {
+                    "folder": {
+                        "$ref": "#/components/schemas/folderItem"
+                    },
+                    "ancestors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FoldersResponse"
+                        }
+                    }
+                }
+            },
+            "GetFilesWithConstraintsItem": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetFilesWithConstraintsRequest": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GetFilesWithConstraintsItem"
+                        }
+                    },
+                    "maxCount": {
+                        "type": "number"
+                    },
+                    "maxSize": {
+                        "type": "number"
+                    }
+                }
+            },
+            "AddPresetRequest": {
+                "type": "object",
+                "required": ["presetName", "transformation"],
+                "properties": {
+                    "presetName": {
+                        "type": "string",
+                        "description": "Name of the preset"
+                    },
+                    "transformation": {
+                        "type": "string",
+                        "description": "A chain of transformations, separated by `~`"
+                    },
+                    "params": {
+                        "type": "object",
+                        "description": "Parameters object for transformation variables"
+                    }
+                }
+            },
+            "AddPresetResponse": {
+                "type": "object",
+                "required": ["presetName", "transformation"],
+                "properties": {
+                    "presetName": {
+                        "type": "string",
+                        "description": "Name of the preset"
+                    },
+                    "transformation": {
+                        "type": "string",
+                        "description": "A chain of transformations, separated by `~`"
+                    },
+                    "params": {
+                        "type": "object",
+                        "description": "Parameters object for transformation variables"
+                    },
+                    "archived": {
+                        "type": "boolean",
+                        "description": "Indicates if the preset has been archived"
+                    }
+                }
+            },
+            "UpdatePresetRequest": {
+                "type": "object",
+                "required": ["archived"],
+                "properties": {
+                    "archived": {
+                        "type": "boolean",
+                        "description": "Indicates if the preset has been archived"
+                    }
+                }
+            },
+            "GetPresetsResponse": {
+                "type": "object",
+                "required": ["items", "page"],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AddPresetResponse"
+                        },
+                        "description": "Presets in current page"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/page",
+                        "description": "page details"
+                    }
+                }
+            },
             "OrganizationDetailSchema": {
                 "type": "object",
                 "properties": {
@@ -2017,6 +2767,23 @@
                 "overwrite": false,
                 "filenameOverride": true
             },
+            "ExploreItemExample": [
+                {
+                    "_id": "dummy-uuid",
+                    "createdAt": "2022-10-05T10:43:04.117Z",
+                    "updatedAt": "2022-10-05T10:43:04.117Z",
+                    "name": "asset2",
+                    "type": "file",
+                    "path": "dir",
+                    "fileId": "dir/asset2",
+                    "format": "jpeg",
+                    "size": 1000,
+                    "access": "private",
+                    "metadata": {},
+                    "height": 100,
+                    "width": 100
+                }
+            ],
             "AppOrgDetailsExample": {
                 "app": {
                     "_id": 123,
