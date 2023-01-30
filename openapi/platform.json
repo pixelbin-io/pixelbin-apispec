@@ -2155,17 +2155,6 @@
                     }
                 }
             },
-            "GetCredentialsResponse": {
-                "type": "object",
-                "required": ["credentials"],
-                "properties": {
-                    "credentials": {
-                        "schema": {
-                            "$ref": "#/components/schemas/CredentialsItem"
-                        }
-                    }
-                }
-            },
             "AddCredentialsRequest": {
                 "type": "object",
                 "required": ["pluginId", "credentials"],
