@@ -1,0 +1,2744 @@
+{
+  "item": [
+    {
+      "id": "00a23e7d-fe5f-4272-b45e-23668c08d778",
+      "name": "Assets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccc25f9a-1998-4f67-84b9-47552951ebcb",
+          "name": "fileUpload | Upload File",
+          "request": {
+            "name": "fileUpload | Upload File",
+            "description": {
+              "content": "Upload File to Pixelbin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "upload",
+                "direct"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file",
+                  "description": "(Required) Asset file"
+                },
+                {
+                  "key": "path",
+                  "value": "path/to/containing/folder",
+                  "type": "text",
+                  "description": "Path where you want to store the asset. Path of containing folder"
+                },
+                {
+                  "key": "name",
+                  "value": "filename",
+                  "type": "text",
+                  "description": "Name of the asset, if not provided name of the file will be used. Note - The provided name will be slugified to make it URL safe"
+                },
+                {
+                  "key": "access",
+                  "value": "public-read",
+                  "type": "text",
+                  "description": "Access level of asset, can be either `public-read` or `private`"
+                },
+                {
+                  "key": "metadata",
+                  "value": "{}",
+                  "type": "text",
+                  "description": "Asset related metadata"
+                },
+                {
+                  "key": "overwrite",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Overwrite flag. If set to `true` will overwrite any file that exists with same path, name and type. Defaults to `false`."
+                },
+                {
+                  "key": "filenameOverride",
+                  "value": "true",
+                  "type": "text",
+                  "description": "If set to `true` will add unique characters to name if asset with given name already exists. If overwrite flag is set to `true`, preference will be given to overwrite flag. If both are set to `false` an error will be raised."
+                },
+                {
+                  "key": "tags",
+                  "value": "tag1",
+                  "type": "text",
+                  "description": "Asset tags"
+                },
+                {
+                  "key": "tags",
+                  "value": "tag2",
+                  "type": "text",
+                  "description": "Asset tags"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2d5ece8a-baf6-4549-92a0-a6e03cacd222",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "upload",
+                    "direct"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Asset file",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "fileReadStream",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Path where you want to store the asset. Path of containing folder",
+                        "type": "text/plain"
+                      },
+                      "key": "path",
+                      "value": "path/to/containing/folder",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Name of the asset, if not provided name of the file will be used. Note - The provided name will be slugified to make it URL safe",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "filename",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Access level of asset, can be either `public-read` or `private`",
+                        "type": "text/plain"
+                      },
+                      "key": "access",
+                      "value": "public-read",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Asset tags",
+                        "type": "text/plain"
+                      },
+                      "key": "tags",
+                      "value": "[\"tag1\",\"tag2\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Asset related metadata",
+                        "type": "text/plain"
+                      },
+                      "key": "metadata",
+                      "value": "{}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Overwrite flag. If set to `true` will overwrite any file that exists with same path, name and type. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "overwrite",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "If set to `true` will add unique characters to name if asset with given name already exists. If overwrite flag is set to `true`, preference will be given to overwrite flag. If both are set to `false` an error will be raised.",
+                        "type": "text/plain"
+                      },
+                      "key": "filenameOverride",
+                      "value": "true",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c27518d-0f72-4cee-9fb5-2127e4db3d12",
+          "name": "urlUpload | Upload Asset with url",
+          "request": {
+            "name": "urlUpload | Upload Asset with url",
+            "description": {
+              "content": "Upload Asset with url",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "upload",
+                "url"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"www.dummy.com/image.png\",\n  \"path\": \"path/to/containing/folder\",\n  \"name\": \"filename\",\n  \"access\": \"public-read\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {},\n  \"overwrite\": false,\n  \"filenameOverride\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85ee8360-1a49-49c6-87cb-207a7e35584c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "upload",
+                    "url"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"www.dummy.com/image.png\",\n  \"path\": \"path/to/containing/folder\",\n  \"name\": \"filename\",\n  \"access\": \"public-read\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {},\n  \"overwrite\": false,\n  \"filenameOverride\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ccbc30a-dc8a-4da0-9e19-190789cd3ff9",
+          "name": "createSignedUrl | S3 Signed URL upload",
+          "request": {
+            "name": "createSignedUrl | S3 Signed URL upload",
+            "description": {
+              "content": "For the given asset details, a S3 signed URL will be generated,\nwhich can be then used to upload your asset.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "upload",
+                "signed-url"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"path/to/containing/folder\",\n  \"name\": \"filename\",\n  \"format\": \"jpeg\",\n  \"access\": \"public-read\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {},\n  \"overwrite\": false,\n  \"filenameOverride\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b2e8febf-5815-430e-942d-e0271376f848",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "upload",
+                    "signed-url"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"path/to/containing/folder\",\n  \"name\": \"filename\",\n  \"format\": \"jpeg\",\n  \"access\": \"public-read\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {},\n  \"overwrite\": false,\n  \"filenameOverride\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"s3PresignedUrl\": {\n    \"url\": \"https://domain.com/xyz\",\n    \"fields\": {\n      \"field1\": \"value\",\n      \"field2\": \"value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d42c4d6e-86a2-4aaf-923e-619ecc7fac40",
+          "name": "listFiles | List and search files and folders.",
+          "request": {
+            "name": "listFiles | List and search files and folders.",
+            "description": {
+              "content": "List all files and folders in root folder. Search for files if name is provided. If path is provided, search in the specified path.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "assets", "v1.0", "listFiles"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "cat",
+                  "description": "Find items with matching name"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "cat-photos",
+                  "description": "Find items with matching path"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "jpeg",
+                  "description": "Find items with matching format"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "cats",
+                  "description": "Find items containing these tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "animals",
+                  "description": "Find items containing these tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "onlyFiles",
+                  "value": "false",
+                  "description": "If true will fetch only files"
+                },
+                {
+                  "disabled": false,
+                  "key": "onlyFolders",
+                  "value": "false",
+                  "description": "If true will fetch only folders"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "1",
+                  "description": "Page No."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Page Size"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "name",
+                  "description": "Key to sort results by. A \"-\" suffix will sort results in descending orders.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f4b21ee-b4da-41e3-a8bc-a13037039a05",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "listFiles"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "cat"
+                    },
+                    {
+                      "key": "path",
+                      "value": "cat-photos"
+                    },
+                    {
+                      "key": "format",
+                      "value": "jpeg"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "cats"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "animals"
+                    },
+                    {
+                      "key": "onlyFiles",
+                      "value": "false"
+                    },
+                    {
+                      "key": "onlyFolders",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "name"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"_id\": \"dummy-uuid\",\n      \"name\": \"dir\",\n      \"type\": \"folder\"\n    },\n    {\n      \"_id\": \"dummy-uuid\",\n      \"name\": \"asset2\",\n      \"type\": \"file\",\n      \"path\": \"dir\",\n      \"fileId\": \"dir/asset2\",\n      \"format\": \"jpeg\",\n      \"size\": 1000,\n      \"access\": \"private\"\n    },\n    {\n      \"_id\": \"dummy-uuid\",\n      \"name\": \"asset1\",\n      \"type\": \"file\",\n      \"path\": \"dir\",\n      \"fileId\": \"dir/asset1\",\n      \"format\": \"jpeg\",\n      \"size\": 1000,\n      \"access\": \"private\"\n    }\n  ],\n  \"page\": {\n    \"type\": \"number\",\n    \"size\": 4,\n    \"current\": 1,\n    \"hasNext\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06f77f70-dfa2-4703-bd22-27773b837e06",
+          "name": "getFileById | Get file details with _id",
+          "request": {
+            "name": "getFileById | Get file details with _id",
+            "description": {},
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "files",
+                "id",
+                ":_id"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "c9138153-94ea-4dbe-bea9-65d43dba85ae",
+                  "key": "_id",
+                  "description": "(Required) _id of File"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0f6445b-7fd0-489a-ae78-df8e3357227f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "files",
+                    "id",
+                    ":_id"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "c9138153-94ea-4dbe-bea9-65d43dba85ae",
+                      "key": "_id",
+                      "description": "(Required) _id of File"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52bbf944-cb50-4336-a6a5-2a83a3b343ba",
+          "name": "getFileByFileId | Get file details with fileId",
+          "request": {
+            "name": "getFileByFileId | Get file details with fileId",
+            "description": {},
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "files",
+                ":fileId"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "path/to/file/name",
+                  "key": "fileId",
+                  "description": "(Required) Combination of `path` and `name` of file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48cb4481-54fe-4e7b-b281-4b79323ceb91",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "path/to/file/name",
+                      "key": "fileId",
+                      "description": "(Required) Combination of `path` and `name` of file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "590188ee-9c8a-4d4b-a3fc-bbf80f1b61e7",
+          "name": "updateFile | Update file details",
+          "request": {
+            "name": "updateFile | Update file details",
+            "description": {},
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "files",
+                ":fileId"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "path/to/file/name",
+                  "key": "fileId",
+                  "description": "(Required) Combination of `path` and `name`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"access\": \"private\",\n  \"isActive\": false,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bc61798a-eb4d-4232-8da2-4f674113c637",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "path/to/file/name",
+                      "key": "fileId",
+                      "description": "(Required) Combination of `path` and `name`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"access\": \"private\",\n  \"isActive\": false,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dd16c6e-b5d5-4a46-90ad-71ebb013cc1f",
+          "name": "deleteFile | Delete file",
+          "request": {
+            "name": "deleteFile | Delete file",
+            "description": {},
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "files",
+                ":fileId"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "path/to/file/name",
+                  "key": "fileId",
+                  "description": "(Required) Combination of `path` and `name`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4177b6b8-9b21-41dd-b876-4610f43883af",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "path/to/file/name",
+                      "key": "fileId",
+                      "description": "(Required) Combination of `path` and `name`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "729e295c-b1c4-49f7-be8a-9d0b291ddfb7",
+          "name": "deleteFiles | Delete multiple files",
+          "request": {
+            "name": "deleteFiles | Delete multiple files",
+            "description": {},
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "files",
+                "delete"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"_id_1\",\n    \"_id_2\",\n    \"_id_3\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "feb9cf8b-eea4-45a6-a0db-f95b4dc4b6ba",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "files",
+                    "delete"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"_id_1\",\n    \"_id_2\",\n    \"_id_3\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"dummy-uuid\",\n    \"name\": \"asset\",\n    \"path\": \"dir\",\n    \"fileId\": \"dir/asset\",\n    \"format\": \"jpeg\",\n    \"size\": 1000,\n    \"access\": \"private\",\n    \"isActive\": true,\n    \"tags\": [\n      \"tag1\",\n      \"tag2\"\n    ],\n    \"metadata\": {\n      \"key\": \"value\"\n    },\n    \"url\": \"https://domain.com/filename.jpeg\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5b870b4-ad5c-47bb-a7cf-305d6e8733c4",
+          "name": "createFolder | Create folder",
+          "request": {
+            "name": "createFolder | Create folder",
+            "description": {
+              "content": "Create a new folder at the specified path. Also creates the ancestors if they do not exist.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "assets", "v1.0", "folders"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"subDir\",\n  \"path\": \"dir\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "989babd8-0113-402a-a146-9ba0de19ef5d",
+              "name": "Success - List of all created folders",
+              "originalRequest": {
+                "url": {
+                  "path": ["service", "platform", "assets", "v1.0", "folders"],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"subDir\",\n  \"path\": \"dir\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"subDir\",\n  \"path\": \"dir\",\n  \"isActive\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b729218-1836-43bf-a6bc-bfcb672768a7",
+          "name": "getFolderDetails | Get folder details",
+          "request": {
+            "name": "getFolderDetails | Get folder details",
+            "description": {
+              "content": "Get folder details\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "assets", "v1.0", "folders"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "dir1/dir2",
+                  "description": "Folder path"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "dir",
+                  "description": "Folder name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e914679d-a8a3-47b1-8907-539f4b1377ac",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": ["service", "platform", "assets", "v1.0", "folders"],
+                  "host": ["{{baseUrl}}"],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "dir1/dir2"
+                    },
+                    {
+                      "key": "name",
+                      "value": "dir"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"dummy-uuid\",\n    \"createdAt\": \"2022-10-05T10:43:04.117Z\",\n    \"updatedAt\": \"2022-10-05T10:43:04.117Z\",\n    \"name\": \"asset2\",\n    \"type\": \"file\",\n    \"path\": \"dir\",\n    \"fileId\": \"dir/asset2\",\n    \"format\": \"jpeg\",\n    \"size\": 1000,\n    \"access\": \"private\",\n    \"metadata\": {},\n    \"height\": 100,\n    \"width\": 100\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e8c34ab-49f9-4e7e-891e-f4641a3c76a4",
+          "name": "updateFolder | Update folder details",
+          "request": {
+            "name": "updateFolder | Update folder details",
+            "description": {
+              "content": "Update folder details. Eg: Soft delete it\nby making `isActive` as `false`.\nWe currently do not support updating folder name or path.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "folders",
+                ":folderId"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "path/to/folder/name",
+                  "key": "folderId",
+                  "description": "(Required) combination of `path` and `name`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isActive\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26821a48-8faa-43f9-8b56-dc46b885f744",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "folders",
+                    ":folderId"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "path/to/folder/name",
+                      "key": "folderId",
+                      "description": "(Required) combination of `path` and `name`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"subDir\",\n  \"path\": \"dir\",\n  \"isActive\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53a27899-e143-4a8e-8e5f-21fd0b4253c4",
+          "name": "deleteFolder | Delete folder",
+          "request": {
+            "name": "deleteFolder | Delete folder",
+            "description": {
+              "content": "Delete folder and all its children permanently.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "folders",
+                ":_id"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "c9138153-94ea-4dbe-bea9-65d43dba85ae",
+                  "key": "_id",
+                  "description": "(Required) _id of folder to be deleted"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3a4ca4c-8952-45a3-a93a-def1c5ac3029",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "folders",
+                    ":_id"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "c9138153-94ea-4dbe-bea9-65d43dba85ae",
+                      "key": "_id",
+                      "description": "(Required) _id of folder to be deleted"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"subDir\",\n  \"path\": \"dir\",\n  \"isActive\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0455d7c6-1319-412e-9545-39432366f5ad",
+          "name": "getFolderAncestors | Get all ancestors of a folder",
+          "request": {
+            "name": "getFolderAncestors | Get all ancestors of a folder",
+            "description": {
+              "content": "Get all ancestors of a folder, using the folder ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "folders",
+                ":_id",
+                "ancestors"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "c9138153-94ea-4dbe-bea9-65d43dba85ae",
+                  "key": "_id",
+                  "description": "(Required) _id of the folder"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6f98d83-f388-487e-92eb-46ea046f69b9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "folders",
+                    ":_id",
+                    "ancestors"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "c9138153-94ea-4dbe-bea9-65d43dba85ae",
+                      "key": "_id",
+                      "description": "(Required) _id of the folder"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"folder\": {\n    \"_id\": \"dummy-uuid\",\n    \"name\": \"subDir\",\n    \"path\": \"dir1/dir2\",\n    \"isActive\": true\n  },\n  \"ancestors\": [\n    {\n      \"_id\": \"dummy-uuid-2\",\n      \"name\": \"dir1\",\n      \"path\": \"\",\n      \"isActive\": true\n    },\n    {\n      \"_id\": \"dummy-uuid-2\",\n      \"name\": \"dir2\",\n      \"path\": \"dir1\",\n      \"isActive\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6140a06d-4526-45ce-b440-99b3369131d8",
+          "name": "addCredentials | Add credentials for a transformation module.",
+          "request": {
+            "name": "addCredentials | Add credentials for a transformation module.",
+            "description": {
+              "content": "Add a transformation modules's credentials for an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "assets", "v1.0", "credentials"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pluginId\": \"awsRek\",\n  \"credentials\": {\n    \"region\": \"ap-south-1\",\n    \"accessKeyId\": \"123456789ABC\",\n    \"secretAccessKey\": \"DUMMY1234567890\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbffac7e-b43e-4e29-bfde-a344d3264815",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "credentials"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pluginId\": \"awsRek\",\n  \"credentials\": {\n    \"region\": \"ap-south-1\",\n    \"accessKeyId\": \"123456789ABC\",\n    \"secretAccessKey\": \"DUMMY1234567890\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"123ee789-7ae8-4336-b9bd-e4f33c049002\",\n  \"createdAt\": \"2022-10-04T09:52:09.545Z\",\n  \"updatedAt\": \"2022-10-04T09:52:09.545Z\",\n  \"orgId\": 23,\n  \"pluginId\": \"awsRek\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d13068b-f1df-4895-81d8-21560c083563",
+          "name": "updateCredentials | Update credentials of a transformation module.",
+          "request": {
+            "name": "updateCredentials | Update credentials of a transformation module.",
+            "description": {
+              "content": "Update credentials of a transformation module, for an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "credentials",
+                ":pluginId"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "awsRek",
+                  "key": "pluginId",
+                  "description": "(Required) ID of the plugin whose credentials are being updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pluginId\": \"awsRek\",\n  \"credentials\": {\n    \"region\": \"ap-south-1\",\n    \"accessKeyId\": \"123456789ABC\",\n    \"secretAccessKey\": \"DUMMY1234567890\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79c832fd-a451-459a-b597-1a5140e25a2d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "credentials",
+                    ":pluginId"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "awsRek",
+                      "key": "pluginId",
+                      "description": "(Required) ID of the plugin whose credentials are being updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pluginId\": \"awsRek\",\n  \"credentials\": {\n    \"region\": \"ap-south-1\",\n    \"accessKeyId\": \"123456789ABC\",\n    \"secretAccessKey\": \"DUMMY1234567890\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"123ee789-7ae8-4336-b9bd-e4f33c049002\",\n  \"createdAt\": \"2022-10-04T09:52:09.545Z\",\n  \"updatedAt\": \"2022-10-04T09:52:09.545Z\",\n  \"orgId\": 23,\n  \"pluginId\": \"awsRek\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f62afca-8303-4d71-99ea-de78c0e21f6b",
+          "name": "deleteCredentials | Delete credentials of a transformation module.",
+          "request": {
+            "name": "deleteCredentials | Delete credentials of a transformation module.",
+            "description": {
+              "content": "Delete credentials of a transformation module, for an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "credentials",
+                ":pluginId"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "awsRek",
+                  "key": "pluginId",
+                  "description": "(Required) ID of the plugin whose credentials are being deleted"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fc71d95-e283-42c4-a4d0-91f476543e48",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "credentials",
+                    ":pluginId"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "awsRek",
+                      "key": "pluginId",
+                      "description": "(Required) ID of the plugin whose credentials are being deleted"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"123ee789-7ae8-4336-b9bd-e4f33c049002\",\n  \"createdAt\": \"2022-10-04T09:52:09.545Z\",\n  \"updatedAt\": \"2022-10-04T09:52:09.545Z\",\n  \"orgId\": 23,\n  \"pluginId\": \"awsRek\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24dfb4ac-f86c-4076-a465-02c4a0b89ae6",
+          "name": "addPreset | Add a preset.",
+          "request": {
+            "name": "addPreset | Add a preset.",
+            "description": {
+              "content": "Add a preset for an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "assets", "v1.0", "presets"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"presetName\": \"p1\",\n  \"transformation\": \"t.flip()~t.flop()\",\n  \"params\": {\n    \"w\": {\n      \"type\": \"integer\",\n      \"default\": 200\n    },\n    \"h\": {\n      \"type\": \"integer\",\n      \"default\": 400\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "269f0b16-6a69-45b0-8a5c-b68a72099947",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": ["service", "platform", "assets", "v1.0", "presets"],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"presetName\": \"p1\",\n  \"transformation\": \"t.flip()~t.flop()\",\n  \"params\": {\n    \"w\": {\n      \"type\": \"integer\",\n      \"default\": 200\n    },\n    \"h\": {\n      \"type\": \"integer\",\n      \"default\": 400\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presetName\": \"p1\",\n  \"transformation\": \"t.flip()~t.flop()\",\n  \"params\": {\n    \"w\": {\n      \"type\": \"integer\",\n      \"default\": 200\n    },\n    \"h\": {\n      \"type\": \"integer\",\n      \"default\": 400\n    }\n  },\n  \"archived\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d83a1bf6-16ae-4704-bdeb-83b1b4421e1d",
+          "name": "getPresets | Get all presets.",
+          "request": {
+            "name": "getPresets | Get all presets.",
+            "description": {
+              "content": "Get all presets of an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "assets", "v1.0", "presets"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bd24b6f-3366-4824-adb3-73fed2e0e57b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": ["service", "platform", "assets", "v1.0", "presets"],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"presetName\": \"p1\",\n      \"transformation\": \"t.flip()~t.flop()\",\n      \"params\": {\n        \"w\": {\n          \"type\": \"integer\",\n          \"default\": 200\n        },\n        \"h\": {\n          \"type\": \"integer\",\n          \"default\": 400\n        }\n      },\n      \"archived\": true\n    }\n  ],\n  \"page\": {\n    \"type\": \"number\",\n    \"size\": 1,\n    \"current\": 1,\n    \"hasNext\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "508097b8-4792-4c93-ab50-b8453b873b4a",
+          "name": "updatePreset | Update a preset.",
+          "request": {
+            "name": "updatePreset | Update a preset.",
+            "description": {
+              "content": "Update a preset of an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "presets",
+                ":presetName"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "p1",
+                  "key": "presetName",
+                  "description": "(Required) Name of the preset to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"archived\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f660c0c-a478-4987-87cb-b9b45c3c9cda",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "presets",
+                    ":presetName"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "p1",
+                      "key": "presetName",
+                      "description": "(Required) Name of the preset to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"archived\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presetName\": \"p1\",\n  \"transformation\": \"t.flip()~t.flop()\",\n  \"params\": {\n    \"w\": {\n      \"type\": \"integer\",\n      \"default\": 200\n    },\n    \"h\": {\n      \"type\": \"integer\",\n      \"default\": 400\n    }\n  },\n  \"archived\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "617a52a3-b8f8-4a2b-8889-2562b79a7c43",
+          "name": "deletePreset | Delete a preset.",
+          "request": {
+            "name": "deletePreset | Delete a preset.",
+            "description": {
+              "content": "Delete a preset of an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "presets",
+                ":presetName"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "p1",
+                  "key": "presetName",
+                  "description": "(Required) Name of the preset to be deleted"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed07959b-74d0-44aa-adeb-b87f64ceb1b9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "presets",
+                    ":presetName"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "p1",
+                      "key": "presetName",
+                      "description": "(Required) Name of the preset to be deleted"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presetName\": \"p1\",\n  \"transformation\": \"t.flip()~t.flop()\",\n  \"params\": {\n    \"w\": {\n      \"type\": \"integer\",\n      \"default\": 200\n    },\n    \"h\": {\n      \"type\": \"integer\",\n      \"default\": 400\n    }\n  },\n  \"archived\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b404d0d-865b-495b-8493-5db55efd82a8",
+          "name": "getPreset | Get a preset.",
+          "request": {
+            "name": "getPreset | Get a preset.",
+            "description": {
+              "content": "Get a preset of an organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "presets",
+                ":presetName"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "p1",
+                  "key": "presetName",
+                  "description": "(Required) Name of the preset to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fca6b62-cd19-4935-a0b4-77c23b5e56d3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "presets",
+                    ":presetName"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "p1",
+                      "key": "presetName",
+                      "description": "(Required) Name of the preset to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presetName\": \"p1\",\n  \"transformation\": \"t.flip()~t.flop()\",\n  \"params\": {\n    \"w\": {\n      \"type\": \"integer\",\n      \"default\": 200\n    },\n    \"h\": {\n      \"type\": \"integer\",\n      \"default\": 400\n    }\n  },\n  \"archived\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30609c70-a292-46f5-ae9e-391358ee16df",
+          "name": "getDefaultAssetForPlayground | Get default asset for playground",
+          "request": {
+            "name": "getDefaultAssetForPlayground | Get default asset for playground",
+            "description": {
+              "content": "Get default asset for playground",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "playground",
+                "default"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d2bcad5-a9aa-46f9-8639-d7b751e104dc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "playground",
+                    "default"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"dummy-uuid\",\n  \"name\": \"asset\",\n  \"path\": \"dir\",\n  \"fileId\": \"dir/asset\",\n  \"format\": \"jpeg\",\n  \"size\": 1000,\n  \"access\": \"private\",\n  \"isActive\": true,\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"metadata\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://domain.com/filename.jpeg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30f7a53a-04ea-42ae-966b-58a900d8443e",
+          "name": "getModules | Get all transformation modules",
+          "request": {
+            "name": "getModules | Get all transformation modules",
+            "description": {
+              "content": "Get all transformation modules.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "playground",
+                "plugins"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "94c9e93a-60a6-42e9-b7ec-9672b2612fe6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "playground",
+                    "plugins"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"delimiters\": {\n    \"operationSeparator\": \"~\",\n    \"parameterSeparator\": \":\"\n  },\n  \"plugins\": {\n    \"erase\": {\n      \"identifier\": \"erase\",\n      \"name\": \"EraseBG\",\n      \"description\": \"EraseBG Background Removal Module\",\n      \"credentials\": {\n        \"required\": false\n      },\n      \"operations\": [\n        {\n          \"params\": {\n            \"name\": \"Industry Type\",\n            \"type\": \"enum\",\n            \"enum\": [\n              \"general\",\n              \"ecommerce\"\n            ],\n            \"default\": \"general\",\n            \"identifier\": \"i\",\n            \"title\": \"Industry type\"\n          },\n          \"displayName\": \"Remove background of an image\",\n          \"method\": \"bg\",\n          \"description\": \"Remove the background of any image\"\n        }\n      ],\n      \"enabled\": true\n    }\n  },\n  \"presets\": [\n    {\n      \"_id\": \"dummy-id\",\n      \"createdAt\": \"2022-02-14T10:06:17.803Z\",\n      \"updatedAt\": \"2022-02-14T10:06:17.803Z\",\n      \"isActive\": true,\n      \"orgId\": \"265\",\n      \"presetName\": \"compressor\",\n      \"transformation\": \"t.compress(q:95)\",\n      \"archived\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52a51f22-b667-4100-b8bd-e850a26db786",
+          "name": "getModule | Get Transformation Module by module identifier",
+          "request": {
+            "name": "getModule | Get Transformation Module by module identifier",
+            "description": {
+              "content": "Get Transformation Module by module identifier\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "assets",
+                "v1.0",
+                "playground",
+                "plugins",
+                ":identifier"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "t",
+                  "key": "identifier",
+                  "description": "(Required) identifier of Transformation Module"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4f8584b-dc66-4df6-a5b0-dd5d3a789bb2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "assets",
+                    "v1.0",
+                    "playground",
+                    "plugins",
+                    ":identifier"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "t",
+                      "key": "identifier",
+                      "description": "(Required) identifier of Transformation Module"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identifier\": \"erase\",\n  \"name\": \"EraseBG\",\n  \"description\": \"EraseBG Background Removal Module\",\n  \"credentials\": {\n    \"required\": false\n  },\n  \"operations\": [\n    {\n      \"params\": {\n        \"name\": \"Industry Type\",\n        \"type\": \"enum\",\n        \"enum\": [\n          \"general\",\n          \"ecommerce\"\n        ],\n        \"default\": \"general\",\n        \"identifier\": \"i\",\n        \"title\": \"Industry type\"\n      },\n      \"displayName\": \"Remove background of an image\",\n      \"method\": \"bg\",\n      \"description\": \"Remove the background of any image\"\n    }\n  ],\n  \"enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f8238e4a-1da5-4724-932f-dc9827e86590",
+      "name": "Organization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9406759b-c128-4849-8b58-d286042522f9",
+          "name": "getAppOrgDetails | Get App Details",
+          "request": {
+            "name": "getAppOrgDetails | Get App Details",
+            "description": {
+              "content": "Get App and org details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "platform",
+                "organization",
+                "v1.0",
+                "apps",
+                "info"
+              ],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef16bb5b-0f51-440c-b1a8-c0c160ed66d9",
+              "name": "Success. Returns a JSON object as shown below. Refer `AppOrgDetails` for more details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "organization",
+                    "v1.0",
+                    "apps",
+                    "info"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"app\": {\n    \"_id\": 123,\n    \"orgId\": 12,\n    \"name\": \"Desktop Client App\",\n    \"permissions\": [\n      \"read\",\n      \"read_write\"\n    ],\n    \"active\": false,\n    \"createdAt\": \"2021-07-15T07:47:00Z\",\n    \"updatedAt\": \"2021-07-15T07:47:00Z\"\n  },\n  \"org\": {\n    \"_id\": 12,\n    \"name\": \"org_1\",\n    \"cloudName\": \"testcloudname\",\n    \"accountType\": \"individual\",\n    \"industry\": \"Ecommerce\",\n    \"strength\": \"1\",\n    \"active\": \"false\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c46d5056-94c4-40d9-9ebe-48da5d54811d",
+              "name": "Bad Request Error. See the error object in the response body to know the exact reason.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "platform",
+                    "organization",
+                    "v1.0",
+                    "apps",
+                    "info"
+                  ],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"nostrud\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6ed74ec9-90c3-46f9-8db0-d8ede7cdf3f4",
+      "name": "Transformation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24e801d0-3f10-46e8-a72f-b82979cdf975",
+          "name": "getTransformationContext | Get transformation context",
+          "request": {
+            "name": "getTransformationContext | Get transformation context",
+            "description": {
+              "content": "Get transformation context",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["service", "platform", "transformation", "context"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "/v2/fynd-eg/t.resize()/__playground/playground-default.jpeg",
+                  "description": "CDN URL with transformation."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcaf69fe-11f5-4f29-b0ad-fff8bad1713e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": ["service", "platform", "transformation", "context"],
+                  "host": ["{{baseUrl}}"],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "/v2/fynd-eg/t.resize()/__playground/playground-default.jpeg"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"context\": {\n    \"steps\": [\n      {\n        \"name\": \"blur\",\n        \"operation\": \"Basic\",\n        \"identifier\": \"t\",\n        \"data\": {},\n        \"metadata\": null,\n        \"format\": \"jpeg\",\n        \"size\": 58650,\n        \"width\": 1140,\n        \"height\": 760,\n        \"space\": \"srgb\",\n        \"channels\": 3,\n        \"depth\": \"uchar\",\n        \"density\": 72,\n        \"chromaSubsampling\": \"4:2:0\",\n        \"isProgressive\": false,\n        \"resolutionUnit\": \"inch\",\n        \"hasProfile\": false,\n        \"hasAlpha\": false,\n        \"orientation\": 1\n      }\n    ],\n    \"metadata\": {\n      \"width\": 1140,\n      \"height\": 760,\n      \"channels\": 3,\n      \"extension\": \"jpeg\",\n      \"format\": \"jpeg\",\n      \"contentType\": \"image/jpeg\",\n      \"size\": 62667,\n      \"assetType\": \"image\",\n      \"isImageAsset\": true,\n      \"isAudioAsset\": false,\n      \"isVideoAsset\": false,\n      \"isRawAsset\": false\n    },\n    \"headers\": {\n      \"host\": \"api.pixelbin.io\",\n      \"x-real-ip\": \"0.0.0.0\",\n      \"origin\": \"https://console.pixelbin.io\",\n      \"accept\": \"application/json, text/plain, */*\",\n      \"accept-encoding\": \"gzip, deflate, br\",\n      \"accept-language\": \"en-US,en;q=0.9\"\n    },\n    \"params\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "028e439b-210z-42dc-8569-0a8d16b07066",
+      "key": "API_TOKEN"
+    }
+  ],
+  "info": {
+    "_postman_id": "ce336905-ec3a-4bb4-b043-e2ff425529d8",
+    "name": "Pixelbin APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pixelbin APIs",
+      "type": "text/plain"
+    }
+  },
+  "auth": null
+}
