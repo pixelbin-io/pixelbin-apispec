@@ -1,7 +1,7 @@
 {
   "info": {
     "title": "Pixelbin APIs",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Pixelbin APIs"
   },
   "openapi": "3.0.2",
@@ -2907,5 +2907,15 @@
         "name": "API-TOKEN"
       }
     }
-  }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.pixelbin.io"
+    }
+  ]
 }
