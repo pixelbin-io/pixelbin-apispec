@@ -1,7 +1,7 @@
 {
   "info": {
     "title": "Pixelbin APIs",
-    "version": "1.4.1",
+    "version": "1.5.0",
     "description": "Pixelbin APIs"
   },
   "openapi": "3.0.2",
@@ -150,6 +150,54 @@
                     "fields": {
                       "field1": "value",
                       "field2": "value"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service/platform/assets/v2.0/upload/signed-url": {
+      "post": {
+        "summary": "Signed multipart upload",
+        "description": "For the given asset details, a presigned URL will be generated, which can be then used to upload your asset in chunks via multipart upload.",
+        "operationId": "createSignedUrlV2",
+        "tags": ["Upload"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignedUploadRequestV2"
+              },
+              "example": {
+                "path": "path/to/containing/folder",
+                "name": "filename",
+                "format": "jpeg",
+                "access": "public-read",
+                "tags": ["tag1", "tag2"],
+                "metadata": {},
+                "overwrite": false,
+                "filenameOverride": true,
+                "expiry": 3000
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignedUploadV2Response"
+                },
+                "example": {
+                  "presignedUrl": {
+                    "url": "https://api.pixelbin.io/service/public/assets/v1.0/signed-multipart?pbs=8b49e6cdd446be379aa4396e1a&pbe=1700600070390&pbt=92661&pbo=143209&pbu=5fe187e8-8649-4546-9a28-ff551839e0f5",
+                    "fields": {
+                      "x-pixb-meta-assetdata": "{\"orgId\":1,\"type\":\"file\",\"name\":\"filename.jpeg\",\"path\":\"\",\"fileId\":\"filename.jpeg\",\"format\":\"jpeg\",\"s3Bucket\":\"erase-erase-erasebg-assets\",\"s3Key\":\"uploads/floral-sun-9617c8/original/a34f1d3-28bf-489c-9aff-cc549ac9e003.jpeg\",\"access\":\"public-read\",\"tags\":[],\"metadata\":{\"source\":\"signedUrl\",\"publicUploadId\":\"5fe187e8-8649-4546-9a28-ff551839e0f5\"},\"overwrite\":false,\"filenameOverride\":false}"
                     }
                   }
                 }
@@ -2075,6 +2123,81 @@
           "presets": {
             "type": "array",
             "description": "List of saved presets"
+          }
+        }
+      },
+      "SignedUploadRequestV2": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name of the file"
+          },
+          "path": {
+            "type": "string",
+            "description": "Path of containing folder."
+          },
+          "format": {
+            "type": "string",
+            "description": "Format of the file"
+          },
+          "access": {
+            "$ref": "#/components/schemas/AccessEnum",
+            "description": "Access level of asset, can be either `public-read` or `private`"
+          },
+          "tags": {
+            "type": "array",
+            "description": "Tags associated with the file.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Metadata associated with the file."
+          },
+          "overwrite": {
+            "type": "boolean",
+            "default": false,
+            "description": "Overwrite flag. If set to `true` will overwrite any file that exists with same path, name and type. Defaults to `false`."
+          },
+          "filenameOverride": {
+            "type": "boolean",
+            "default": false,
+            "description": "If set to `true` will add unique characters to name if asset with given name already exists. If overwrite flag is set to `true`, preference will be given to overwrite flag. If both are set to `false` an error will be raised."
+          },
+          "expiry": {
+            "type": "integer",
+            "default": 3000,
+            "description": "Expiry time in seconds for the signed URL. Defaults to 3000 seconds."
+          }
+        }
+      },
+      "SignedUploadV2Response": {
+        "type": "object",
+        "required": ["presignedUrl"],
+        "properties": {
+          "presignedUrl": {
+            "$ref": "#/components/schemas/PresignedUrlV2",
+            "description": "Presigned URL for uploading asset in chunks"
+          }
+        }
+      },
+      "PresignedUrlV2": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Presigned URL for uploading asset in chunks",
+            "example": "https://api.pixelbin.io/service/public/assets/v1.0/signed-multipart?pbs=8b49e6cdd445ceda287be1a&pbe=1700600070390&pbt=92661&pbo=143209&pbu=5fe187e8-8649-4546-9a28-ff551839e0f5"
+          },
+          "fields": {
+            "type": "object",
+            "description": "signed fields to be sent along with request",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },
