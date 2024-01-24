@@ -164,7 +164,7 @@
         "summary": "Signed multipart upload",
         "description": "For the given asset details, a presigned URL will be generated, which can be then used to upload your asset in chunks via multipart upload.",
         "operationId": "createSignedUrlV2",
-        "tags": ["Upload"],
+        "tags": ["Assets"],
         "requestBody": {
           "content": {
             "application/json": {
